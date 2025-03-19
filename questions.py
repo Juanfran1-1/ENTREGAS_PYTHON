@@ -71,9 +71,9 @@ for pregunta, opciones, correcta in preguntas:
                 print("Intenta de nuevo.\n")
                 
 # si no se llego a la ultima pregunta se imprime SIGUIENTE PREGUNTA
-    if len(preguntas) != 3:
-        print("°SIGUIENTE PREGUNTA:")
+    if pregunta != preguntas[-1][0]:
+        print("\n°SIGUIENTE PREGUNTA:")
         
 #MUESTRA EL PUNTAJE FINAL  (INCISO B)      
-print(f"Tu puntaje final es: {score}")
+print(f"\n---FIN DEL JUEGO---\nTu puntaje final es: {score}")
 
