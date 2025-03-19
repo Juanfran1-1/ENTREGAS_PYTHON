@@ -47,8 +47,8 @@ for pregunta, opciones, correcta in preguntas:
         #se pide la respuesta del usuario y se guarda en user_answer
         user_answer = input("Respuesta: ") 
         
-        # (INCISO A) Se verifica que la respuesta sea un número entero y válido, si no lo es se termina el juego
-        if not user_answer.isdigit() or not (0 <= int(user_answer) - 1 < len(opciones)):
+        # (INCISO A) Se verifica que la respuesta sea un número entero y válido entre las opciones (1 a 4), si no lo es se termina el juego 
+        if not user_answer.isdigit() or not (1 <= int(user_answer) < len(opciones)):
             print("RESPUESTA INVALIDA. FIN DEL JUEGO")
             sys.exit(1)
         else:
