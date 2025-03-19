@@ -47,17 +47,13 @@ for pregunta, opciones, correcta in preguntas:
         #se pide la respuesta del usuario y se guarda en user_answer
         user_answer = input("Respuesta: ") 
         
-        # (INCISO A) Se verifica que la respuesta sea un número entero si no lo es se termina el juego
-        if not user_answer.isdigit():
+        # (INCISO A) Se verifica que la respuesta sea un número entero y válido, si no lo es se termina el juego
+        if not user_answer.isdigit() or not (0 <= int(user_answer) - 1 < len(opciones)):
             print("RESPUESTA INVALIDA. FIN DEL JUEGO")
             sys.exit(1)
         else:
             #se resta 1 a la respuesta del usuario para que coincida con el indice de la respuesta correcta
             user_answer = int(user_answer) - 1
-            #se verifica que la respuesta sea un numero valido si no se termina el juego
-            if user_answer < 0 or user_answer >= len(opciones):
-                print("RESPUESTA INVALIDA. FIN DEL JUEGO")
-                sys.exit(1)
             
         # Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
         if user_answer == correcta:
