@@ -26,14 +26,14 @@ answers = [
 correct_answers_index = [1, 2, 0, 3, 1]
 
 
-#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES 
+#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO C)
 preguntas= random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 
 #INICIA EL PUNTAJE EN 0
 score = 0
 
 
-# El usuario deberá contestar 3 preguntas
+# El usuario deberá contestar 3 preguntas (INCISO D)
 for pregunta, opciones, correcta in preguntas:
     
 # Se muestra la pregunta y las respuestas posibles
@@ -43,9 +43,12 @@ for pregunta, opciones, correcta in preguntas:
         
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
+        
         #se pide la respuesta del usuario y se resta 1 para que coincida con el índice de la respuesta correcta 
         user_answer = int(input("Respuesta: ")) - 1
-        # Se verifica que la respuesta sea válida y se encuentra en el rango de opciones, si no se encuentra en el rango termina el juego con un mensaje de error (sys.exit(1))
+        
+        # (INCISO A) Se verifica que la respuesta sea válida y se encuentra en el rango de opciones
+        # si no se encuentra en el rango termina el juego con un mensaje de error (sys.exit(1))
         if user_answer < 0 or user_answer >= len(opciones):
             print("RESPUESTA INVALIDA. FIN DEL JUEGO")
             sys,exit(1)
@@ -58,14 +61,17 @@ for pregunta, opciones, correcta in preguntas:
         else:
             print("Incorrecto. ")
             score -= 0.5
+            
             #verifica si se llego al ultimo intento para mostrar la respuesta correcta si no muestra un mensaje para volver a intentar
             if intento == 1:
                 print(f"La respuesta correcta es: {opciones[correcta]}\n")
             else: 
                 print("Intenta de nuevo.\n")
+                
 # si no se llego a la ultima pregunta se imprime SIGUIENTE PREGUNTA
     if len(preguntas) != 3:
         print("°SIGUIENTE PREGUNTA:")
-#MUESTRA EL PUNTAJE FINAL        
+        
+#MUESTRA EL PUNTAJE FINAL  (INCISO B)      
 print(f"Tu puntaje final es: {score}")
 
