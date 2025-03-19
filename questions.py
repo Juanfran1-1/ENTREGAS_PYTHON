@@ -44,22 +44,28 @@ for pregunta, opciones, correcta in preguntas:
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
         
-        #se pide la respuesta del usuario y se resta 1 para que coincida con el índice de la respuesta correcta 
-        user_answer = int(input("Respuesta: ")) - 1
+        #se pide la respuesta del usuario y se guarda en user_answer
+        user_answer = input("Respuesta: ") 
         
-        # (INCISO A) Se verifica que la respuesta sea válida y se encuentra en el rango de opciones
-        # si no se encuentra en el rango termina el juego con un mensaje de error (sys.exit(1))
-        if user_answer < 0 or user_answer >= len(opciones):
+        # (INCISO A) Se verifica que la respuesta sea un número entero si no lo es se termina el juego
+        if not user_answer.isdigit():
             print("RESPUESTA INVALIDA. FIN DEL JUEGO")
-            sys,exit(1)
-        
+            sys.exit(1)
+        else:
+            #se resta 1 a la respuesta del usuario para que coincida con el indice de la respuesta correcta
+            user_answer = int(user_answer) - 1
+            #se verifica que la respuesta sea un numero valido si no se termina el juego
+            if user_answer < 0 or user_answer >= len(opciones):
+                print("RESPUESTA INVALIDA. FIN DEL JUEGO")
+                sys.exit(1)
+            
         # Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
         if user_answer == correcta:
-            print("¡Correcto!\n") 
+            print("¡Correcto!\nGANASTE 1 PUNTO.") 
             score += 1
             break
         else:
-            print("Incorrecto. ")
+            print("Incorrecto.\nPERDISTE 0.5 PUNTOS.")
             score -= 0.5
             
             #verifica si se llego al ultimo intento para mostrar la respuesta correcta si no muestra un mensaje para volver a intentar
