@@ -30,7 +30,7 @@ correct_answers_index = [1, 2, 0, 3, 1]
 score = 0
 
 #SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO C)
-preguntas= random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
+preguntas= random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 
 # El usuario deberá contestar 3 preguntas (INCISO C)
 for pregunta, opciones, correcta in preguntas:
