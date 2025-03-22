@@ -29,16 +29,15 @@ correct_answers_index = [1, 2, 0, 3, 1]
 #INICIA EL PUNTAJE EN 0
 score = 0
 
+#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO C)
+preguntas= random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
 
-# El usuario deberá contestar 3 preguntas
-for _ in range(3):
-# Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions) - 1)
+# El usuario deberá contestar 3 preguntas (INCISO C)
+for pregunta, opciones, correcta in preguntas:
 # Se muestra la pregunta y las respuestas posibles
-    print(questions[question_index])
-    for i, answer in enumerate(answers[question_index]):
+    print(pregunta)
+    for i, answer in enumerate(opciones):
         print(f"{i + 1}. {answer}")
-        
         
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
@@ -46,7 +45,7 @@ for _ in range(3):
         user_answer = input("Respuesta: ") 
         
         # (INCISO A) Se verifica que la respuesta sea un número entero y válido entre las opciones (1 a 4), si no lo es se termina el juego 
-        if not user_answer.isdigit() or not (1 <= int(user_answer) <= len(answers[question_index])):
+        if not user_answer.isdigit() or not (1 <= int(user_answer) <= len(opciones)):
             print("RESPUESTA INVALIDA. FIN DEL JUEGO")
             sys.exit(1)
         else:
@@ -54,7 +53,7 @@ for _ in range(3):
             user_answer = int(user_answer) - 1
             
 # Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
-        if user_answer == correct_answers_index[question_index]:
+        if user_answer == correcta:
             print("¡Correcto!\nGANASTE 1 PUNTO.") 
             score += 1
             break
@@ -63,8 +62,7 @@ for _ in range(3):
             score -= 0.5
     else:
 # Si el usuario no responde correctamente después de 2 intentos,se muestra la respuesta correcta
-            print("Incorrecto. La respuesta correcta es:")
-            print(answers[question_index][correct_answers_index[question_index]])
+            print(f"La respuesta correcta es: {opciones[correcta]}\n")
 # Se imprime un blanco al final de la pregunta
     print()
     
