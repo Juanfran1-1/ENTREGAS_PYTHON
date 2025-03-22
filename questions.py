@@ -1,6 +1,4 @@
 import random
-import sys
-
 # Preguntas para el juego
 questions = [
 "¿Qué función se usa para obtener la longitud de una cadena en Python?",
@@ -25,55 +23,25 @@ answers = [
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
 
-
-#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO C)
-preguntas= random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
-
-#INICIA EL PUNTAJE EN 0
-score = 0
-
-
-# El usuario deberá contestar 3 preguntas (INCISO D)
-for pregunta, opciones, correcta in preguntas:
-    
+# El usuario deberá contestar 3 preguntas
+for _ in range(3):
+# Se selecciona una pregunta aleatoria
+    question_index = random.randint(0, len(questions) - 1)
 # Se muestra la pregunta y las respuestas posibles
-    print(pregunta)
-    for i, answer in enumerate(opciones):
+    print(questions[question_index])
+    for i, answer in enumerate(answers[question_index]):
         print(f"{i + 1}. {answer}")
-        
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        
-        #se pide la respuesta del usuario y se guarda en user_answer
-        user_answer = input("Respuesta: ") 
-        
-        # (INCISO A) Se verifica que la respuesta sea un número entero y válido entre las opciones (1 a 4), si no lo es se termina el juego 
-        if not user_answer.isdigit() or not (1 <= int(user_answer) <= len(opciones)):
-            print("RESPUESTA INVALIDA. FIN DEL JUEGO")
-            sys.exit(1)
-        else:
-            #se resta 1 a la respuesta del usuario para que coincida con el indice de la respuesta correcta
-            user_answer = int(user_answer) - 1
-            
-        # Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
-        if user_answer == correcta:
-            print("¡Correcto!\nGANASTE 1 PUNTO.") 
-            score += 1
+        user_answer = int(input("Respuesta: ")) - 1
+# Se verifica si la respuesta es correcta
+        if user_answer == correct_answers_index[question_index]:
+            print("¡Correcto!")
             break
         else:
-            print("Incorrecto.\nPERDISTE 0.5 PUNTOS.")
-            score -= 0.5
-            
-            #verifica si se llego al ultimo intento para mostrar la respuesta correcta si no muestra un mensaje para volver a intentar
-            if intento == 1:
-                print(f"La respuesta correcta es: {opciones[correcta]}\n")
-            else: 
-                print("Intenta de nuevo.\n")
-                
-# si no se llego a la ultima pregunta se imprime SIGUIENTE PREGUNTA
-    if pregunta != preguntas[-1][0]:
-        print("\n°SIGUIENTE PREGUNTA:")
-        
-#MUESTRA EL PUNTAJE FINAL  (INCISO B)      
-print(f"\n---FIN DEL JUEGO---\nTu puntaje final es: {score}")
-
+# Si el usuario no responde correctamente después de 2 intentos,
+# se muestra la respuesta correcta
+            print("Incorrecto. La respuesta correcta es:")
+            print(answers[question_index][correct_answers_index[question_index]])
+# Se imprime un blanco al final de la pregunta
+        print()
