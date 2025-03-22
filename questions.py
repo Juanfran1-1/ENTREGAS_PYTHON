@@ -29,11 +29,12 @@ correct_answers_index = [1, 2, 0, 3, 1]
 #INICIA EL PUNTAJE EN 0
 score = 0
 
-#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO C)
+#SELECCIONA TRES PREGUNTAS ALEATORIAS SIN REPETICIONES (INCISO D)
 preguntas= random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 
 # El usuario deberá contestar 3 preguntas (INCISO C)
 for pregunta, opciones, correcta in preguntas:
+    
 # Se muestra la pregunta y las respuestas posibles
     print(pregunta)
     for i, answer in enumerate(opciones):
@@ -41,6 +42,7 @@ for pregunta, opciones, correcta in preguntas:
         
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
+        
         #se pide la respuesta del usuario y se guarda en user_answer
         user_answer = input("Respuesta: ") 
         
@@ -52,7 +54,7 @@ for pregunta, opciones, correcta in preguntas:
             #se resta 1 a la respuesta del usuario para que coincida con el indice de la respuesta correcta
             user_answer = int(user_answer) - 1
             
-# Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
+        # Se verifica si la respuesta es correcta, si lo es suma 1 al score, si no lo es resta 0.5 al score
         if user_answer == correcta:
             print("¡Correcto!\nGANASTE 1 PUNTO.") 
             score += 1
@@ -60,11 +62,15 @@ for pregunta, opciones, correcta in preguntas:
         else:
             print("Incorrecto.\nPERDISTE 0.5 PUNTOS.")
             score -= 0.5
-    else:
-# Si el usuario no responde correctamente después de 2 intentos,se muestra la respuesta correcta
-            print(f"La respuesta correcta es: {opciones[correcta]}\n")
-# Se imprime un blanco al final de la pregunta
-    print()
-    
+        #verifica si se llego al ultimo intento para mostrar la respuesta correcta si no muestra un mensaje para volver a intentar
+            if intento == 1:
+                print(f"La respuesta correcta es: {opciones[correcta]}\n")
+            else: 
+                print("Intenta de nuevo.\n")
+                
+    # si no se llego a la ultima pregunta se imprime SIGUIENTE PREGUNTA
+    if pregunta != preguntas[-1][0]:
+        print("\n°SIGUIENTE PREGUNTA:")
+
 #MUESTRA EL PUNTAJE FINAL  (INCISO B)      
 print(f"\n---FIN DEL JUEGO---\nTu puntaje final es: {score}")    
